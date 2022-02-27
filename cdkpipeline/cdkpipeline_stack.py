@@ -3,6 +3,7 @@ from constructs import Construct
 import aws_cdk.aws_ssm as ssm
 
 from aws_cdk.pipelines import CodePipeline, CodePipelineSource, ShellStep
+from cdkpipeline.cdkpipeline_app_stage import MyPipelineAppStage
 
 class CdkpipelineStack(cdk.Stack):
 
@@ -25,3 +26,14 @@ class CdkpipelineStack(cdk.Stack):
                 ]
             )
         )
+        stage = pipeline.add_stage(
+            MyPipelineAppStage(
+                self,
+                "test"
+            ))
+        stage.add_post(
+            ShellStep(
+                "validate",
+                commands=[
+                    'curl -Ssf https://my.webservice.com/'
+                ]))
