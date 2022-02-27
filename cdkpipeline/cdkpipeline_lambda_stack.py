@@ -1,9 +1,10 @@
+from ast import Lambda
 import aws_cdk as cdk
 from constructs import Construct
 from aws_cdk.aws_lambda import Function, InlineCode, Runtime
 import aws_cdk.aws_apigateway as apigateway
 
-class MyLambdaStack(cdk.Stack):
+class LambdaStack(cdk.Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
@@ -20,6 +21,11 @@ class MyLambdaStack(cdk.Stack):
             'Gateway',
             description='Endpoint for a simple Lambda-powered web service',
             handler=handler
+        )
+        self.urlOutput = cdk.CfnOutput(
+            self,
+            'Url',
+            value=gw.url
         )
 
 

@@ -1,9 +1,9 @@
 import aws_cdk as cdk
 from constructs import Construct
-from cdkpipeline.cdkpipeline_lambda_stack import MyLambdaStack
+from cdkpipeline.cdkpipeline_lambda_stack import LambdaStack
 
-class MyPipelineAppStage(cdk.Stage):
+class PipelineAppStage(cdk.Stage):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        lambdaStack = MyLambdaStack(self, "LambdaStack")
+        lambdaStack = LambdaStack(self, "LambdaStack")
